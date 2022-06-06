@@ -1,40 +1,40 @@
-buildscript {
-    ext {
-        springBootVersion = '2.1.7.RELEASE'
-    }
-    // classpath는 아래 dependencies에 추가해주면 오류나서 맨 위에서 별도로 추가해야 합니다
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
-}
-
-// 책에 나와있는 대로 써도 동작되는데 요 방식이 최신 버전이에요
-plugins {
+plugins { // (1)
+    id 'org.springframework.boot' version '2.4.1' // RELEASE 삭제
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
-    id 'eclipse'
-    id 'org.springframework.boot' version '2.1.7.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 }
 
 group 'com.jojoldu.book'
-version '1.0-SNAPSHOT'
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8
 
 repositories {
-    // jcenter() 지원 종료라 추가안해도 됩니당! - from 지윤님ㅎ.ㅎ
     mavenCentral()
+    jcenter()
+}
+
+// for Junit 5
+test { // (2)
+    useJUnitPlatform()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-    // 혹시 위 코드들에 노란 밑줄 생기면 jupiter-engine 업그레이드 문제일거예요
-    // 업그레이드 버튼이 뜨니까 눌러서 업그레이드 하시면 자동으로 5.8.2로 바뀝니다! -지윤
-
-    // gradle 버전 업데이트 되면서 compile, testcompile 대신 implementation,testimplementation 사용해야 한대요!
+    //(3)
     implementation('org.springframework.boot:spring-boot-starter-web')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-}
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
 
-test {
-    useJUnitPlatform()
+    // lombok
+    implementation('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
+    testImplementation('org.projectlombok:lombok')
+    testAnnotationProcessor('org.projectlombok:lombok')
+
+    //스프링 부트용 SpringData Jpa 추상화 라이브러리 > 스프링부트 버전에 맞춰 JPA 관련 라이브러리 버전 관리
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa') 
+    implementation("org.mariadb.jdbc:mariadb-java-client")
+    //인메모리 관계형 데이터베이스 > 별도의 설치 없이 프로젝트 의존성 많으로 관리 가능 > 테스트 용도로 많이 사용
+    implementation('com.h2database:h2')
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
 }
