@@ -6,6 +6,18 @@
             <div class="col-md-6">
                 <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
 
+<!--            머스테치에는 if문이 없다 그래서 항상 최종값을 넘겨줘야함-->
+                {{#userName}}
+                    Logged in as : <span id="user">{{userName}}</span>
+
+<!--                스프링 시큐리티에서 기본적으로 제공하는 로그아웃 URL-->
+                    <a href="logout" class="btn btn-info active" role="button">Logout</a>
+
+                {{/userName}}
+                {{^userName}} <!-- 머스테치에서 해당 값이 존재하지 않으면 ^를 사용 > 여기서는 없으면 버튼을 노출시킴 -->
+<!--                    스프링 시큐리티에서 기본적으로 제공하는 로그인 URL-->
+                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                {{/userName}}
             </div>
         </div>
         <br>
