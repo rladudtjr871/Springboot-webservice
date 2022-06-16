@@ -42,7 +42,7 @@ public class IndexController {
         
         //세션에 저장된 값이 있으면 model에 userName으로 등록
         if (user != null) {
-            model.addAttribute("userName", user.getName());
+            model.addAttribute("loginUserName", user.getName());
         }
         
         return "index";
