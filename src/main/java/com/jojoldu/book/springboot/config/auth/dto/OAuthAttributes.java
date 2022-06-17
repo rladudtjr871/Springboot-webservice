@@ -75,7 +75,7 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .picture(picture)
-                .role(Role.GUEST)
+                .role(Role.USER) //이 부분 글쓰기 접근 제약ㄷ
                 .build();
     }
 
