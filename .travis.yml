@@ -30,14 +30,13 @@ before_deploy: #deploy명령어 실행 전에 수행 / CodeDeploy는 Jar파일�
 deploy: #외부 서비스와 연동될 행위들을 선언
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
-    secret_access_key: $AWS_SECRET_KEY 
-    
+    secret_access_key: $AWS_SECRET_KEY
     bucket: k-springboot-build #S3 버킷
     region: ap-northeast-2
     skip_cleanup: true
     acl: private # zip파일 접근을 private으로
     local_dir: deploy # before_deploy에서 생성한 deploy 디렉토리를 지정 > 여기 위치한 파일들만 S3로 전송
-    wait-until-deploy: true
+    wait-until-deployed: true
 
 
 # CI 실행 완료 시 메일로 알람
