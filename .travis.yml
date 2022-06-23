@@ -5,7 +5,7 @@ jdk:
 # Travis CI를 어느 브랜치가 푸시될 때 수행할지 지정
 branches: 
   only:
-    - main
+    - master
 
 # Travis CI 서버의 Home
 # 그레이들을 통해 의존성을 받으면 이를 해당 디렉토리에 캐시하여, 같은 의존성은 다음 배포때부터 다시 받지 않는다.
@@ -40,12 +40,11 @@ deploy: #외부 서비스와 연동될 행위들을 선언
     wait-until-deployed: true
 
   - provider: codedeploy
-      access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
-      secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+      access_key_id: $AWS_ACCESS_KEY
+      secret_access_key: $AWS_SECRET_KEY
 
       bucket: k-springboot-build # S3 버킷
       key: k-springboot2-webservice.zip # 빌드 파일을 압축해서 전달
-
       bundle_type: zip # 압축 확장자
       application: k-springboot2-webservice # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
       deployment_group: k-springboot2-webservice-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
