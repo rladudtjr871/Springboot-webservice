@@ -21,7 +21,6 @@ script: "./gradlew clean build"
 # gradlew 실행 권한 부여
 before_install:
   - chmod +x gradlew
-  -
 
 before_deploy: #deploy명령어 실행 전에 수행 / CodeDeploy는 Jar파일은 인식 못하므로 Jar+기타 설정 파일들을 모아 압축
   - zip -r springboot-webservice * #현재 위치의 모든 파일을 해당 이름을 압축
