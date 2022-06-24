@@ -7,6 +7,10 @@ branches:
   only:
     - main
 
+# gradlew 실행 권한 부여
+before_install:
+  - chmod +x gradlew
+
 # Travis CI 서버의 Home
 # 그레이들을 통해 의존성을 받으면 이를 해당 디렉토리에 캐시하여, 같은 의존성은 다음 배포때부터 다시 받지 않는다.
 cache:
@@ -14,12 +18,10 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
+
 #프로젝트 내부에 둔 gradlew을 통해 Clean&Build를 수행      
 script: "./gradlew clean build"
 
-# gradlew 실행 권한 부여
-before_install:
-  - chmod +x gradlew
 
 before_deploy: #deploy명령어 실행 전에 수행 / CodeDeploy는 Jar파일은 인식 못하므로 Jar+기타 설정 파일들을 모아 압축
   - zip -r k-springboot-webservice * #현재 위치의 모든 파일을 해당 이름을 압축
