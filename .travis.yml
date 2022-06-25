@@ -37,6 +37,9 @@ deploy: #외부 서비스와 연동될 행위들을 선언
     acl: private # zip파일 접근을 private으로
     local_dir: deploy # before_deploy에서 생성한 deploy 디렉토리를 지정 > 여기 위치한 파일들만 S3로 전송
     wait-until-deployed: true
+    on:
+      all_branches: true
+
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
@@ -49,6 +52,9 @@ deploy: #외부 서비스와 연동될 행위들을 선언
     deployment_group: k-springboot2-webservice-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed: true
+    on:
+      all_branches: true
+
 
 
 
