@@ -18,7 +18,6 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
-
 #프로젝트 내부에 둔 gradlew을 통해 Clean&Build를 수행      
 script: "./gradlew clean build"
 
